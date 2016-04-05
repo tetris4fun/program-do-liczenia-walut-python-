@@ -1,0 +1,39 @@
+
+import Tkinter
+import tkMessageBox
+import webData
+
+def ButtonClicked():
+    radio_wartosc = Tkinter.relStatus.get()
+    liczba2 = float(liczba.get())
+    tkMessageBox.showinfo("Kwota: ", webData.ObliczWartosc(webData.PobierzDane(radio_wartosc), liczba2))
+okno = Tkinter.Tk()
+okno.title("Kursy walut na dziś")
+okno.geometry('400x250')
+
+
+#1 komunikat
+Tkinter.labelText = Tkinter.StringVar()
+Tkinter.labelText.set("Wybierz którą walute chcesz przeliczać:")
+label1 = Tkinter.Label(okno,textvariable = Tkinter.labelText, height = 4)
+label1.pack()
+#zaznacz walute
+Tkinter.relStatus = Tkinter.StringVar()
+Tkinter.relStatus.set(None)
+radio1 = Tkinter.Radiobutton(okno, text="EUR", value="EUR", variable = Tkinter.relStatus)
+radio2 = Tkinter.Radiobutton(okno, text="USD", value="USD", variable = Tkinter.relStatus)
+radio1.pack()
+radio2.pack()
+#2komunikat
+Tkinter.labelText = Tkinter.StringVar()
+Tkinter.labelText.set("Podaj kwote w PLN i wcisnij guzik.")
+label2 = Tkinter.Label(okno,textvariable = Tkinter.labelText, height = 4)
+label2.pack()
+#entry
+liczba = Tkinter.Entry(okno)
+liczba.pack()
+#button
+button1 = Tkinter.Button(okno, text="Oblicz", width = 20, command = ButtonClicked)
+button1.pack(side = "top")
+
+okno.mainloop()
