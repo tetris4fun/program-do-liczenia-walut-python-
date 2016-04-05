@@ -1,0 +1,24 @@
+import urllib
+import re
+
+def PobierzDane(wartosc):
+    if wartosc == "EUR":
+        wyr_reg = re.compile('<td>1 EUR</td><td>(\d,\d{4})</td>')
+    elif wartosc =="USD":
+        wyr_reg = re.compile('<td>1 USD</td><td>(\d,\d{4})</td>')
+    else: 
+        print "Nie zaznaczyłeś waluty."    
+    link = "http://www.nbp.pl/home.aspx?f=/kursy/instrukcja_pobierania_kursow_walut.html"
+    strona = urllib.urlopen(link).read()        
+    znajdz_wartosc = re.findall(wyr_reg, strona)
+    lista = []
+    lista[:] = range(6) 
+    for i in range(0,1):
+        cyfry = znajdz_wartosc[i]
+    liczby_string = ""  
+    a = liczby_string.join(cyfry)
+    liczba = float(a.replace(',','.'))
+    return liczba
+
+def ObliczWartosc(wartosc, liczba):
+    return wartosc*liczba
